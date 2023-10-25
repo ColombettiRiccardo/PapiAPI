@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Root } from './pokemonTypes.model';
 
 @Component({
   selector: 'app-pagin-pokemon',
@@ -9,8 +11,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class PaginPokemonComponent {
   routeObs!: Observable<ParamMap>
+  pokeListObs!: Observable<Object>
+  poke !: Root
 
-  constructor( private route: ActivatedRoute, ){
+  constructor( private route: ActivatedRoute, private http : HttpClient ){
     
   }
   ngOnInit(): void {
@@ -21,7 +25,12 @@ export class PaginPokemonComponent {
 
   getRouterParam = (params: ParamMap) =>{
     let pokemonId = params.get('path')
-    console.log(pokemonId);
+
+    if (pokemonId != null){
+      this.pokeListObs = this.http.get<Root>("https://pokeapi.co/api/v2/type/"+ pokemonId)
+      this.pokeListObs.subscribe((data:any) => this.poke = data)
+    }
+
 
   }
 }
