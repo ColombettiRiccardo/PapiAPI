@@ -1,0 +1,9 @@
+
+<div #stu *ngFor ="let tipo of pokemonList">
+  <a routerLink = "/pagin-pokemon/{{getLastPart(tipo.url)}}">
+    {{tipo.name}} 
+  </a>
+  
+</div>
+
+<router-outlet></router-outlet>
