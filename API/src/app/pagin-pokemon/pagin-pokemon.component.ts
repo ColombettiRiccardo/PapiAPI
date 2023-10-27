@@ -31,6 +31,10 @@ export class PaginPokemonComponent {
       this.pokeListObs.subscribe((data:any) => this.poke = data)
     }
 
-
+  }
+  getLastPart (url:string){
+    const parts = url.split('/')
+  //  console.log(parts)
+    return parts.at(-2)
   }
 }

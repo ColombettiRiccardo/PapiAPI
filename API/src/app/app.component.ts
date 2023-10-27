@@ -22,6 +22,8 @@ export class AppComponent {
   arcar = (data:any) =>{
     this.pokemonList = data.results
   }
+
+  
   getLastPart (url:string){
     const parts = url.split('/')
   //  console.log(parts)
